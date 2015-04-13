@@ -1,0 +1,7 @@
+{
+    "require": {
+        "symfony/framework-standard-edition": "~2.6.6",
+        "friendsofsymfony/rest-bundle": "~1.5",
+        "symfony/dom-crawler": "~2.6" 
+    }
+}
