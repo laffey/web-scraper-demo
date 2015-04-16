@@ -31,7 +31,10 @@ services:
         class:      EIdeas\OpenPayments\ScraperBundle\Scraper\Job\DoctorPaymentProcessor
         arguments:  ["@document_manager"]
 
-    monolog_line_formatter:
-        class: Monolog\Formatter\LineFormatter
-        calls:
-            - [includeStacktraces]
+    doctor_payment_query:
+        class:      EIdeas\OpenPayments\ScraperBundle\Document\Query\DoctorPaymentQuery
+        arguments:  ["@document_manager"]
+
+    op_column_query:
+        class:      EIdeas\OpenPayments\ScraperBundle\Document\Query\OpColumnQuery
+        arguments:  ["@document_manager"]
