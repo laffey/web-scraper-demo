@@ -1,0 +1,8 @@
+# This file is auto-generated during the composer install
+parameters:
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: 7ca6c731946d5d12aflwijfalsjdf832697ac75c77c405c75a00ec5c

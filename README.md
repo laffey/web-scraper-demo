@@ -15,7 +15,7 @@ Use the API to add new users for the front-end.
 * Export data to XLS.
 
 ## Requirements
-PHP 5.6, MongoDB 3.0
+PHP 5.6, MongoDB 3.0, PHP extension: mongo
 
 ## Install
 Checkout the project. From root of project, run:

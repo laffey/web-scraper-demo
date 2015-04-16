@@ -1,0 +1,9 @@
+web_interface:
+    resource: "@EIdeasOpScraperBundle/Controller/Web"
+    prefix: /
+    type: annotation
+
+api:
+    resource: "@EIdeasOpScraperBundle/Controller/Api"
+    prefix: /api/
+    type: annotation
