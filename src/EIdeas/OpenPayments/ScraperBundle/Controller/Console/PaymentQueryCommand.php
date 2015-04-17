@@ -136,6 +136,7 @@ class PaymentQueryCommand extends ContainerAwareCommand {
         $opColumnQuery = $this->getContainer()->get('op_column_query');
         try {
             $propertyName = $opColumnQuery->getModelPropertyName($filter[0]);
+            $dataType = $opColumnQuery->getColumnDataType($filter[0]);
         } catch (\InvalidArgumentException $e) {
             $output->writeln($e->getMessage());
             return;
@@ -146,6 +147,9 @@ class PaymentQueryCommand extends ContainerAwareCommand {
          * @var \EIdeas\OpenPayments\ScraperBundle\Document\Query\DoctorPaymentQuery $doctorPaymentQuery
          */
         $doctorPaymentQuery = $this->getContainer()->get('doctor_payment_query');
+        if ($dataType == 'number') {
+            $propertyValue = (int)$propertyValue;
+        }
         $resultSet = $doctorPaymentQuery->filter($propertyName, $propertyValue);
         $numOfRecords = 0;
         foreach ($resultSet as $paymentRecord) {

@@ -27,6 +27,13 @@ class OpColumnQuery {
     );
 
     /**
+     * cache when we find a column
+     *  key = column_name, value = OpColumn model
+     * @var array
+     */
+    private $columnRepository = array();
+
+    /**
      * @var DocumentManager
      */
     protected $documentManager;
@@ -68,7 +75,29 @@ class OpColumnQuery {
         if (!array_key_exists($columnName, $this->aggregateColumns)) {
             throw new \InvalidArgumentException("Invalid column name given");
         }
-        return $this->camelCase($columnName);;
+        return $this->camelCase($columnName);
+    }
+
+    /**
+     * Grab info on the data type for given column
+     *      throws exception if the column isn't found in the db
+     *
+     * @param $columnName
+     * @throws \InvalidArgumentException
+     */
+    public function getColumnDataType($columnName)
+    {
+        if (empty($this->columnRepository[$columnName])) {
+            $qb = $this->documentManager->getRepository('op_column')->createQueryBuilder();
+            $qb->field('fieldName')->equals($columnName);
+            $columnModel = $qb->getQuery()->getSingleResult();
+            if ($columnModel) {
+                $this->columnRepository[$columnName] = $columnModel;
+            } else {
+                throw new \InvalidArgumentException("Column doesn't exist in the db");
+            }
+        }
+        return $this->columnRepository[$columnName]->getDataTypeName();
     }
 
     /**
@@ -99,6 +128,31 @@ class OpColumnQuery {
             $aggregates[] = array('value' => $fieldValue, 'count' => $countResult);
         }
         return $aggregates;
+    }
+
+    /**
+     * get all columns to build a table, or spreadsheet
+     *      builds an array like:
+     *      ['column_name' => 'label', ...]
+     * @return array
+     */
+    public function getColumnsForTable()
+    {
+        $columns = $this->aggregateColumns;
+        $columns['general_transaction_id'] = 'General Transaction ID';
+        $repository = $this->documentManager->getRepository('op_column');
+        $allColumnRecords = $repository->findAll();
+
+        /**
+         * @var \EIdeas\OpenPayments\ScraperBundle\Document\Model\OpColumn $record
+         */
+        foreach ($allColumnRecords as $record) {
+            if (!array_key_exists($record->getFieldName(), $columns)) {
+                $columns[$record->getFieldName()] = $record->getName();
+            }
+        }
+
+        return $columns;
     }
 
     /**

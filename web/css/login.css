@@ -1,0 +1,73 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.logo-signin {
+    max-width:420px;
+    padding:15px;
+    margin:0 auto;
+}
+
+.logo-signin h1 {
+    font-size:32px;
+}
+
+.logo-signin h4 {
+    text-align: right;
+    font-size:14px;
+}
+
+.container footer {
+    max-width:420px;
+    padding:15px;
+    margin:0 auto;
+    text-align: right;
+    font-size:10px;
+    margin-top:40px;
+}
+
+.entrance-form {
+  max-width: 420px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.entrance-form .entrance-form-heading,
+.entrance-form .checkbox {
+  margin-bottom: 10px;
+}
+.entrance-form .checkbox {
+  font-weight: normal;
+}
+.entrance-form .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.entrance-form .form-control:focus {
+  z-index: 2;
+}
+.entrance-form input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.entrance-form input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.right {
+    text-align:right;
+}
+.form-help {
+    margin-bottom: 20px;
+}
+.form-help h4 {
+    margin-top: 15px;
+}

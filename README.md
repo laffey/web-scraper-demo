@@ -13,6 +13,7 @@ PHP 5.6, local MongoDB 3.0, PHP extension: mongo
 ## Install
 1. Checkout the project. From root of project, run:
 > composer install
+
 *(requires composer, which you can get at: https://getcomposer.org/doc/00-intro.md)*
 
 2. Make sure your virtual host is set to point to:
@@ -79,8 +80,8 @@ The API is used by the web front-end. Use your browser's inspect tool to monitor
 
 
 ## Front-end
-* Record list page with a "type-ahead" search box
-* Export recordset to XLS button
+* Record list page with a slick "type-ahead" search box
+* Export recordset to XLS button <feature omitted>
 
 
 

@@ -4,6 +4,5 @@ web_interface:
     type: annotation
 
 api:
-    resource: "@EIdeasOpScraperBundle/Controller/Api"
+    resource: "@EIdeasOpScraperBundle/Resources/config/api-routing.yml"
     prefix: /api/
-    type: annotation

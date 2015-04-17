@@ -1,0 +1,19 @@
+open_payments_list:
+  pattern: /payments/{page}
+  defaults: { _controller: EIdeasOpScraperBundle:Api\OpenPayments:list, page = 1}
+  requirements:
+    _method: GET
+    page: "\d+"
+
+search_hints:
+  pattern: /search-hints
+  defaults: { _controller: EIdeasOpScraperBundle:Api\OpColumns:hint }
+  requirements:
+    _method: GET
+
+open_payments_filter:
+  pattern: /payments/filter/{filterValue}/{filterCategory}/{page}
+  defaults: { _controller: EIdeasOpScraperBundle:Api\OpenPayments:filter, page = 1}
+  requirements:
+    _method: GET
+    page: "\d+"

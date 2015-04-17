@@ -41,7 +41,7 @@ class DoctorPaymentQuery {
         $offset = null;
         if ($page > 0) {
             $limit = self::RECORDS_PER_PAGE;
-            $offset = $page * self::RECORDS_PER_PAGE;
+            $offset = ($page - 1) * self::RECORDS_PER_PAGE;
         }
         $resultSet = $repository->findBy(
             [],
@@ -64,7 +64,11 @@ class DoctorPaymentQuery {
     {
         $qb = $this->documentManager->getRepository('doctor_payment')->createQueryBuilder();
         if (!empty($fieldName) && !empty($fieldValue)) {
-            $qb->field($fieldName)->equals(new \MongoRegex('/^' . $fieldValue . '/'));
+            if (is_numeric($fieldValue)) {
+                $qb->field($fieldName)->equals($fieldValue);
+            } else {
+                $qb->field($fieldName)->equals(new \MongoRegex('/^' . $fieldValue . '/'));
+            }
         }
         return $qb->count()->getQuery()->execute();
     }
@@ -74,15 +78,20 @@ class DoctorPaymentQuery {
      *
      * @param string $fieldName
      * @param mixed $fieldValue
+     * @param int $page
      * @return \Doctrine\ODM\MongoDB\Cursor
      */
-    public function filter($fieldName, $fieldValue)
+    public function filter($fieldName, $fieldValue, $page = 0)
     {
         $qb = $this->documentManager->getRepository('doctor_payment')->createQueryBuilder();
         if (is_numeric($fieldValue)) {
             $qb->field($fieldName)->equals($fieldValue);
         } else {
             $qb->field($fieldName)->equals(new \MongoRegex('/^' . $fieldValue . '/'));
+        }
+        if ($page > 0) {
+            $qb->limit(self::RECORDS_PER_PAGE);
+            $qb->skip(($page - 1) * self::RECORDS_PER_PAGE);
         }
         return $qb->getQuery()->execute();
     }

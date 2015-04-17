@@ -1,1 +1,37 @@
-This needs work.
+{% extends 'EIdeasOpScraperBundle::main.html.twig' %}
+
+{% block javascript_includes %}
+    {{ parent() }}
+    <script src="/js/e-ideas-typehinting.js"></script>
+{% endblock %}
+
+{% block container %}
+    <h1 class="page-header">Open Data</h1>
+
+    <div class="typeahead-wrapper">
+        <div class="typeahead-demo">
+            <div id="loader-wrapper"><img src="/img/ajax-loader.gif" /></div>
+            <input class="typeahead" id="main-typeahead" placeholder="start typing. see what happens.">
+        </div>
+    </div>
+    <div class="row ei-button-row">
+        <p id="record-count"></p>
+        <button type="button" class="btn btn-sm btn-default pull-right get-more-button">More Results</button>
+    </div>
+
+    <div class="alert alert-warning" id="result-warning" role="alert" style="display:none;">
+        <strong>Well now!</strong> Looks like there's nothing else to show.
+    </div>
+
+    <div class="alert alert-danger" id="result-danger" role="alert" style="display:none;">
+        <strong>Eek.</strong> Network error occurred or the response could not be read.
+    </div>
+
+    <div class="table-responsive" id="payments_table_wrapper">
+        Things need to load. Stand by.
+    </div>
+
+    <div class="row ei-button-row">
+        <button type="button" class="btn btn-sm btn-default pull-right get-more-button">More Results</button>
+    </div>
+{% endblock container %}

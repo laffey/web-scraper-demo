@@ -394,7 +394,7 @@ class DoctorPayment implements ModelInterface {
     /**
      * Set savedOn
      *
-     * @param date $savedOn
+     * @param \DateTime $savedOn
      * @return self
      */
     public function setSavedOn($savedOn)
@@ -406,7 +406,7 @@ class DoctorPayment implements ModelInterface {
     /**
      * Get savedOn
      *
-     * @return date $savedOn
+     * @return \DateTime $savedOn
      */
     public function getSavedOn()
     {
@@ -433,5 +433,36 @@ class DoctorPayment implements ModelInterface {
     public function getScraperJobId()
     {
         return $this->scraperJobId;
+    }
+
+    /**
+     * convert all properties to a hash array
+     * @return array
+     */
+    public function toArray()
+    {
+        $vars = get_object_vars($this);
+        $model = [];
+        foreach ($vars as $property => $propertyValue) {
+            if ($propertyValue instanceof \DateTime) {
+                //convert to string
+                $model[$this->toUnderscore($property)] = $propertyValue->format('m/d/Y');
+            } else {
+                $model[$this->toUnderscore($property)] = $propertyValue;
+            }
+        }
+        return $model;
+    }
+
+    /**
+     * convert camel cased string to underscored string
+     *  return the new string
+     *
+     * @param string $string
+     * @return string
+     */
+    protected function toUnderscore($string)
+    {
+        return strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $string));
     }
 }
